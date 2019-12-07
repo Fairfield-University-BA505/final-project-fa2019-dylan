@@ -114,14 +114,12 @@ class cleanse():
     def autolabel(self, rects, counts):
         """
             Attach a text label above each bar displaying its height
-        """
 
-        '''
             Got this from 
             https://stackoverflow.com/questions/30228069/how-to-display-the-value-of-the-bar-on-each-bar-with-pyplot-barh
 
             Altered it to but whatever text I wanted on the bar instead of the height
-        '''
+        """
         for x, rect in zip(counts, rects):
             height = rect.get_height()
             ax.text(rect.get_x() + rect.get_width()/2., height,
@@ -224,10 +222,17 @@ class cleanse():
 
     def time_since_update_stats(self, dat, num_bins = 10):
         '''
-            Previous steps needed to make this work:
+        Parameters: 
+        dat (df): df which will be visualized
+        num_bins (int): number of bins to segment data
 
-            dat['curr_release_date'] = pd.to_datetime(dat['Current Version Release Date'], format="%d/%m/%Y")
-            dat['time_since_update'] = (np.datetime64('today') - dat['curr_release_date']).astype('timedelta64[D]')
+        Returns: 
+        str: Cleansed Text
+        
+        Previous steps needed to make this work:
+
+        dat['curr_release_date'] = pd.to_datetime(dat['Current Version Release Date'], format="%d/%m/%Y")
+        dat['time_since_update'] = (np.datetime64('today') - dat['curr_release_date']).astype('timedelta64[D]')
 
         '''
 
@@ -294,12 +299,14 @@ class cleanse():
         i1 = Image.open(BytesIO(first)).resize((50,50))
         hold = []
         for idx,i2 in enumerate(lst):
+            # Resize to make it faster
             i2 = Image.open(BytesIO(i2)).resize((50,50))
             if i1.mode != i2.mode:
                 hold.append(100)
                 continue
             assert i1.size == i2.size, "Different sizes."
 
+            # Check pairwise
             pairs = zip(i1.getdata(), i2.getdata())
 
             #Manhatten distance for images
