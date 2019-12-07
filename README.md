@@ -51,3 +51,5 @@ This git repo contains several different directories, each with their own purpos
     - notebooks - Initial notebooks and rough exploration work
 * scripts
     - Package with helper and display functions for the demo
+* predictions
+	- Anything used for predictions related to the App data including clustering and cluster visualizations
